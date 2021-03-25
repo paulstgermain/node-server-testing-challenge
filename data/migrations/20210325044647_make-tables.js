@@ -20,7 +20,7 @@ exports.up = function(knex) {
             .notNullable()
             .references('genre_id')
             .inTable('genres')
-            .onDelete('RESTRICT')
+            .onDelete('CASCADE')
             .onUpdate('CASCADE');
         tbl.integer('pages').defaultTo(null);
         tbl.boolean('hasRead').defaultTo(false);
@@ -29,7 +29,7 @@ exports.up = function(knex) {
             .notNullable()
             .references('user_id')
             .inTable('users')
-            .onDelete('RESTRICT')
+            .onDelete('CASCADE')
             .onUpdate('CASCADE')
     })
 };

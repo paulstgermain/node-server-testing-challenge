@@ -5,6 +5,22 @@ const db = require('../data/db-config'); // eslint-disable-line
 
 const User = require('./users/users-model');
 
+// beforeAll(async () => {
+//     await db.migrate.rollback();
+//     await db.migrate.latest();
+// })
+
+// beforeEach(async () => {
+//     await db('users').truncate();
+//     await db('genres').truncate();
+//     await db('books').truncate();
+//     await db.seed.run();
+// })
+
+// afterAll(async () => {
+//     await db.destroy();
+// })
+
 /*===================
 Server Sanity Tests
 =====================*/
@@ -35,57 +51,3 @@ describe('server.js', () => {
     });
 });
 
-/*=============
-DB Access Tests
-==============*/
-
-describe('users model', () => {
-    describe('get()', () => {
-        it('should send correct array of users', async () => {
-            const users = await User.get();
-
-            expect(users).toHaveLength(3);
-            expect(users[0].username).toEqual('Bob');
-        });
-    });
-
-    describe('insert()', () => {
-        // Write two tests
-    });
-
-    describe('update()', () => {
-        // Write two tests
-    })
-})
-
-describe('genres model', () => {
-    describe('get()', () => {
-        it('should send correct array of genres', async () => {
-
-        });
-    });
-
-    describe('insert()', () => {
-        // Write two tests
-    });
-
-    describe('update()', () => {
-        // Write two tests
-    })
-})
-
-describe('books model', () => {
-    describe('get()', () => {
-        it('should send correct array of books', async () => {
-
-        });
-    });
-
-    describe('insert()', () => {
-        // Write two tests
-    });
-
-    describe('update()', () => {
-        // Write two tests
-    })
-})
