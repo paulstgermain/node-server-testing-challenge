@@ -16,18 +16,54 @@ afterAll(async () => {
     await db.destroy();
 })
 
+/*=============
+DB Access Tests
+==============*/
+
 describe('genres model', () => {
     describe('get()', () => {
         it('should send correct array of genres', async () => {
-
+            const genres = await Genre.get();
+            expect(genres).toHaveLength(5);
         });
+
+        it('sends properly formatted genre objects', async () => {
+            const genres = await Genre.get();
+            expect(genres[0]).toMatchObject({ genre_id: 1, genre_name: 'horror' })
+        })
     });
 
     describe('insert()', () => {
-        // Write two tests
+        it('correctly inserts new genre into db', async () => {
+            const genre = { genre_name: 'humor' };
+
+            await Genre.insert(genre);
+
+            expect(await db('genres')).toHaveLength(6);
+        })
+        it('returns new genre object in correct format', async () => {
+            const genre = { genre_name: 'humor' };
+
+            const result = await Genre.insert(genre);
+
+            expect(result).toMatchObject({ genre_id: 6, genre_name: 'humor' })
+        })
     });
 
     describe('update()', () => {
-        // Write two tests
+        const changes = { genre_name: 'slice of life' }
+        it('can update a user in DB', async () => {
+            await Genre.update(2, changes);
+
+            const result = await db('genres').where('genre_id', 2).first();
+
+            expect(result).toMatchObject({ genre_id: 2, genre_name: 'slice of life' });
+        })
+
+        it('returns the updated genre', async () => {
+            const result = await Genre.update(2, changes);
+
+            expect(result).toMatchObject({ genre_id: 2, genre_name: 'slice of life' });
+        })
     })
 })
