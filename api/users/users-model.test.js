@@ -69,19 +69,3 @@ describe('users model', () => {
         })
     })
 })
-
-describe('books model', () => {
-    describe('get()', () => {
-        it('should send correct array of books', async () => {
-
-        });
-    });
-
-    describe('insert()', () => {
-        // Write two tests
-    });
-
-    describe('update()', () => {
-        // Write two tests
-    })
-})
