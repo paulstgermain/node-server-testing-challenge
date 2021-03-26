@@ -19,9 +19,18 @@ const update = async (id, changes) => {
     return getById(id);
 }
 
+const remove = async (id) => {
+    const result = await getById(id);
+
+    await db('genres').where('genre_id', id).delete();
+
+    return result;
+}
+
 module.exports = {
     get,
     getById,
     insert,
-    update
+    update,
+    remove
 }

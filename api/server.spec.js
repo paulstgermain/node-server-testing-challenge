@@ -84,4 +84,32 @@ describe('/api/genre', () => {
             expect(response.status).toBe(201);
         })
     })
+
+    describe('[PUT]', () => {
+        let changes = { genre_name: 'life' };
+        let response;
+        beforeAll(async () => {
+            const id = 2;
+            response = await request(server).put('/api/genres/' + id).send(changes);
+        })
+
+        it('successfully updates a genre', async () => {
+            console.log(response.status)
+            expect(response.body).toMatchObject({ genre_id: 2, genre_name: 'life' })
+        })
+    })
+
+    describe('[DELETE]', () => {
+        it('successfully deletes a genre', async () => {
+            await request(server).delete('/api/genres/' + 6);
+
+            expect(await db('genres')).toHaveLength(5);
+        });
+
+        it('returns the deleted genre', async () => {
+            const result = await request(server).delete('/api/genres/' + 2);
+
+            expect(result.body).toMatchObject({ genre_id: 2, genre_name: 'life' });
+        })
+    })
 })

@@ -24,4 +24,24 @@ router.post('/', (req, res, next) => {
         })
 })
 
+router.put('/:id', (req, res, next) => {
+    Genre.update(req.params.id, req.body)
+        .then(updated => {
+            res.json(updated);
+        })
+        .catch(err => {
+            res.status(500).json(err.message)
+        })
+})
+
+router.delete('/:id', (req, res, next) => {
+    Genre.remove(req.params.id)
+        .then(deleted => {
+            res.json(deleted);
+        })
+        .catch(err => {
+            res.status(500).json(err.message);
+        })
+})
+
 module.exports = router;

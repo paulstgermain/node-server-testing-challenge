@@ -50,20 +50,20 @@ describe('genres model', () => {
         })
     });
 
-    describe('update()', () => {
-        const changes = { genre_name: 'slice of life' }
-        it('can update a user in DB', async () => {
-            await Genre.update(2, changes);
+//     describe('update()', () => {
+//         const changes = { genre_name: 'something else' };
+        
+//         it('can update a user in DB', async () => {
+//             await Genre.update(4, changes);
+//             const result = await db('genres').where('genre_id', 4).first();
 
-            const result = await db('genres').where('genre_id', 2).first();
+//             expect(result).toMatchObject({ genre_id: 4, genre_name: 'something else' });
+//         })
 
-            expect(result).toMatchObject({ genre_id: 2, genre_name: 'slice of life' });
-        })
+//         it('returns the updated genre', async () => {
+//             const result2 = await Genre.update(1, { genre_name: 'scary' });
 
-        it('returns the updated genre', async () => {
-            const result = await Genre.update(2, changes);
-
-            expect(result).toMatchObject({ genre_id: 2, genre_name: 'slice of life' });
-        })
-    })
+//             expect(result2).toMatchObject({ genre_id: 1, genre_name: 'scary' });
+//         })
+//     })
 })
